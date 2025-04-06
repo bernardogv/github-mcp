@@ -1,16 +1,12 @@
 # github_mcp/server.py
 import logging
 import sys
-from mcp.server.fastmcp import FastMCP
-# Change this line:
-from . import tools
-
-# To this:
 import github_mcp.tools as tools
+from mcp.server.fastmcp import FastMCP
 
 # Configure logging
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.DEBUG,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[logging.StreamHandler()]
 )
@@ -28,6 +24,7 @@ def main():
     """Run the MCP server."""
     try:
         logger.info("Starting GitHub MCP server...")
+        logger.debug("Using transport: stdio")
         mcp.run(transport='stdio')
     except Exception as e:
         logger.error(f"Error running server: {e}")
